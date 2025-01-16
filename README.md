@@ -3,7 +3,8 @@
 
 This project demonstrates how to deploy and manage the Vid-City application on a Kubernetes cluster on Google Cloud. It provides instructions for setting up necessary APIs, creating a cluster, configuring the ingress controller, and deploying the application using Skaffold.
 
-![Homepage]frontend/frontend/public/Homepage screenshot.png) 
+![Homepage](frontend/frontend/public/Homepage%20screenshot.png)
+
 
 
 ## Prerequisites
