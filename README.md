@@ -113,7 +113,17 @@ After the application is deployed, the ingress controller will expose it on a pu
 kubectl get ingress
 ```
 
-This will show you the external IP or DNS name that you can use to access the Vid-City application.
+This will show you the external IP that you can use to access the Vid-City application.
+Now, you need to resolve the IP-address of the ingress controller to a DNS name ("vid-city" in this app).
+In Windows, the file is located at:
+
+```bash
+C:\Windows\System32\drivers\etc
+```
+Add the Ingress controller IP Address with the hostname like this: 
+- <IP-ADDRESS> <DOMAIN NAME>
+- 34.135.180.61 vid-city.com (replace the IP address with your ingress controller IP)
+- Now, you can access vid-city.com in your browser!
 
 ## Conclusion
 
