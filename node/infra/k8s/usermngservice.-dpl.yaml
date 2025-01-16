@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usermngservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usermngservice
+  template:
+    metadata:
+      labels:
+        app: usermngservice
+    spec:
+      containers:
+        - name: usermngservice
+          image: us.gcr.io/vid-city/usermngservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usermngservice-srv
+spec:
+  selector:
+    app: usermngservice
+  ports:
+    - name: usermngservice
+      protocol: TCP
+      port: 8000
+      targetPort: 8000

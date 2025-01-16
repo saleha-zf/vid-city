@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videomngservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videomngservice
+  template:
+    metadata:
+      labels:
+        app: videomngservice
+    spec:
+      containers:
+        - name: videomngservice
+          image: us.gcr.io/vid-city/videomngservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: videomngservice-srv
+spec:
+  selector:
+    app: videomngservice
+  ports:
+    - name: videomngservice
+      protocol: TCP
+      port: 8001
+      targetPort: 8001

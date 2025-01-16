@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storagemngservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storagemngservice
+  template:
+    metadata:
+      labels:
+        app: storagemngservice
+    spec:
+      containers:
+        - name: storagemngservice
+          image: us.gcr.io/vid-city/storagemngservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storagemngservice-srv
+spec:
+  selector:
+    app: storagemngservice
+  ports:
+    - name: storagemngservice
+      protocol: TCP
+      port: 8002
+      targetPort: 8002

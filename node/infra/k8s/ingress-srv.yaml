@@ -1,0 +1,70 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
+spec:
+  rules:
+    - host: vid-city.com
+      http:
+        paths:
+          - path: /api/video/upload
+            pathType: Prefix
+            backend:
+              service:
+                name: videomngservice-srv
+                port:
+                  number: 8001
+          - path: /api/video/user/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: videomngservice-srv
+                port:
+                  number: 8001
+          - path: /api/video/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: videomngservice-srv
+                port:
+                  number: 8001
+          - path: /api/user/login
+            pathType: Prefix
+            backend:
+              service:
+                name: usermngservice-srv
+                port:
+                  number: 8000
+          - path: /api/user/register
+            pathType: Prefix
+            backend:
+              service:
+                name: usermngservice-srv
+                port:
+                  number: 8000
+          - path: /api/storage/user/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: storagemngservice-srv
+                port:
+                  number: 8002
+          - path: /api/usage/user/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: usagemngservice-srv
+                port:
+                  number: 8003
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-srv
+                port:
+                  number: 3000

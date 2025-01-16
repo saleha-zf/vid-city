@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*       # Includes all Kubernetes manifests
+build:
+  googleCloudBuild:
+    projectId: vid-city
+  artifacts:
+    - image: us.gcr.io/vid-city/videomngservice
+      context: videoMngService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: us.gcr.io/vid-city/loggingservice
+      context: LoggingService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: us.gcr.io/vid-city/frontend
+      context: FrontendService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: us.gcr.io/vid-city/storagemngservice
+      context: StorageMngService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: us.gcr.io/vid-city/usagemngservice
+      context: UsageMngService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: us.gcr.io/vid-city/usermngservice
+      context: UserMngService
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .

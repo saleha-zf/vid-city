@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loggingservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loggingservice
+  template:
+    metadata:
+      labels:
+        app: loggingservice
+    spec:
+      containers:
+        - name: loggingservice
+          image: us.gcr.io/vid-city/loggingservice
+          ports:
+            - containerPort: 8004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loggingservice-srv
+spec:
+  selector:
+    app: loggingservice
+  ports:
+    - name: loggingservice
+      protocol: TCP
+      port: 8004
+      targetPort: 8004
